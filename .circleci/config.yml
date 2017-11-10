@@ -10,7 +10,7 @@ workflows:
   version: 2
   test_build:
     jobs:
-      - build
+      - build:
           filters:
             tags:
               only: /v.*/
