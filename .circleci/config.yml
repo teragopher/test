@@ -6,4 +6,9 @@ jobs:
     steps:
       - checkout
       - run: echo "hello world"
+workflows:
+  version: 2
+  test_build:
+    jobs:
+      - build
 #
