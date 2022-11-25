@@ -5,7 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install -g bats
-      - run: bats -v
+      - uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: "mike-test-key-vault" 
+          secrets: 'google-api-key,google-default-client-id,google-default-client-secret'  
+        id: myGetSecretAction # ID for secrets that you will reference
+      - run: |
+          echo ${{ steps.myGetSecretAction.outputs.google-api-key }}
+          echo ${{ steps.myGetSecretAction.outputs.google-default-client-id }}
+          echo ${{ steps.myGetSecretAction.outputs.google-default-client-secret }}
